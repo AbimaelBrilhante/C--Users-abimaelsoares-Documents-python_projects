@@ -1,15 +1,14 @@
-import time
+import requests
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 driver = webdriver.Firefox()
+from bs4 import BeautifulSoup
 
-driver.get("http://www5.sefaz.mt.gov.br/")
-time.sleep(2)
 
-dado = driver.find_elements(By.NAME,"CEP")
+page = requests.get("http://www5.sefaz.mt.gov.br/")
+soup = BeautifulSoup(page.text, 'html.parser')
+endereco = soup.find
 
-for d in dado:
-    print(d.text)
+for e in endereco:
+    print(e)
+page.close()
 
-time.sleep(2)
-driver.close()
