@@ -1,11 +1,27 @@
 import csv
 import sqlite3
 
-
 class Sped:
     def __init__(self, arquivo):
         self.conexao = sqlite3.connect(arquivo)
         self.cursor = self.conexao.cursor()
+        self.tabela = 'CREATE TABLE IF NOT EXISTS sped_relatorio(none_1 TEXT,REG_100 TEXT,' \
+                      'IND_OPER TEXT,IND_EMIT TEXT,COD_PART TEXT,COD_MOD TEXT,COD_SIT TEXT,' \
+                      'SER TEXT,NUM_DOC TEXT,CHV_NFE TEXT,DT_DOC TEXT,DT_E_S TEXT,VL_DOC TEXT,' \
+                      'IND_PGTO TEXT,VL_DESC_100 TEXT,VL_ABAT_NT_100 TEXT,VL_MERC TEXT,IND_FRT TEXT,' \
+                      'VL_FRT TEXT,VL_SEG TEXT,VL_OUT_DA TEXT,VL_BC_ICMS_100 TEXT,VL_ICMS_100 TEXT,' \
+                      'VL_BC_ICMS_ST_100 TEXT,VL_ICMS_ST_100 TEXT,VL_IPI_100 TEXT,VL_PIS_100 TEXT,' \
+                      'VL_COFINS_100 TEXT,VL_PIS_ST TEXT,VL_COFINS_ST TEXT,none_2 TEXT,none_3 TEXT,' \
+                      'REG TEXT,NUM_ITEM TEXT,COD_ITEM TEXT,DESCR_COMPL TEXT,QTD TEXT,UNID TEXT,VL_ITEM TEXT,' \
+                      'VL_DESC TEXT,IND_MOV TEXT,CST_ICMS TEXT,CFOP TEXT,COD_NAT TEXT,VL_BC_ICMS TEXT,ALIQ_ICMS TEXT,' \
+                      'VL_ICMS TEXT,VL_BC_ICMS_ST TEXT,ALIQ_ST TEXT,VL_ICMS_ST TEXT,IND_APUR TEXT,CST_IPI TEXT,' \
+                      'COD_ENQ TEXT,VL_BC_IPI TEXT,ALIQ_IPI TEXT,VL_IPI TEXT,CST_PIS TEXT,VL_BC_PIS TEXT,' \
+                      'ALIQ_PIS_170 TEXT,QUANT_BC_PIS TEXT,ALIQ_PIS TEXT,VL_PIS TEXT,CST_COFINS TEXT,VL_BC_COFINS TEXT,' \
+                      'ALIQ_COFINS_170 TEXT,QUANT_BC_COFINS TEXT,ALIQ_COFINS TEXT,VL_COFINS TEXT,COD_CTA TEXT,' \
+                      'VL_ABAT_NT TEXT,none_4 TEXT)'
+
+        self.cursor.execute(self.tabela)
+
 
     def inserir(self, none_1, *args):
         consulta = 'INSERT OR IGNORE INTO sped_relatorio (none_1,REG_100,IND_OPER,IND_EMIT,COD_PART,COD_MOD,COD_SIT,' \
@@ -81,13 +97,29 @@ class Sped:
         for r in self.relatorio:
             print(r)
 
+    # EXPORTANDO BD PARA EXCEL
     def exportar_excel(self):
-        pass
+        import sqlite3
+        from xlsxwriter.workbook import Workbook
+        workbook = Workbook('sped_relatorio.xlsx')
+        worksheet = workbook.add_worksheet()
+
+        conn = sqlite3.connect('sped_relatorio.db')
+        c = conn.cursor()
+        c.execute("select * from sped_relatorio")
+        mysel = c.execute("select * from sped_relatorio ")
+        for i, row in enumerate(mysel):
+            for j, value in enumerate(row):
+                worksheet.write(i, j, value)
+        workbook.close()
+
 
 
 if __name__ == "__main__":
 
+
     Sped('sped_relatorio.db').adicionar_bd()
+    #Sped('sped_relatorio.db').exportar_excel()
 
 
 
