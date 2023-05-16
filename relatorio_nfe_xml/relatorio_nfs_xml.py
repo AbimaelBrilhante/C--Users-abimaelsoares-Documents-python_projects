@@ -74,6 +74,7 @@ class Read_xml():
 
 #if __name__ == "__main__":
 xml = Read_xml(r'C:\Users\abimaelsoares\Desktop\Nova pasta')
+#xml = Read_xml(r'X:\CONTROLADORIA\COMPLIANCE FISCAL\APURAÇÃO & CONCILIAÇÃO FISCAL\CONTROLES\Controle de Ressarcimentos\2023\04. Abril\ST24 - Brasília\Notas fiscais\st24')
 all = xml.all_files()
 
 
