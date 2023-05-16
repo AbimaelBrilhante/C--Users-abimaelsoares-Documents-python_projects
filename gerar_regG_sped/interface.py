@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import gerar_regg
-
 from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
@@ -67,15 +66,11 @@ space_3.grid(row=3, column=3,)
 
 button_11 = Button(button_f3, text = '\n ER3 \n ',bg="#4040ff",width=21, pady=60,padx=10, border=2,font='arial 16',foreground='#cacbd2')
 button_11.grid(row=4, column=4)
-#button_f3.pack(side = 'top')
+button_f3.pack(side = 'top')
 button_11["command"] = lambda:[gerar_regg.gerar_300_305(),mensagem_exporta()]
 
 
-
 button_f3.configure(background="#cacbd2")
-
-
-
 root.configure(background="#cacbd2")
 
 root.mainloop()

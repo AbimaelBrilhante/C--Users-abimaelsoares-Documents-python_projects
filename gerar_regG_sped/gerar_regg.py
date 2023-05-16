@@ -35,6 +35,7 @@ def gerar_registro_g():
                 dado = (f'|G125|{linha[0]}|{linha[1]}|{linha[2]}|{linha[3]}|{linha[4]}|{linha[5]}'
                         f'|{linha[6]}|{linha[7]}|{linha[8]}|\n')
                 file.write(dado)
+                #excluir_ultima_linha_g()
 
     alterar_reg_g()
 
@@ -47,6 +48,7 @@ def gerar_300_305():
                     f'|0305|{linha[26]}|{linha[27]}|4|\n')
             file.write(dado_imobilizado)
     alterar_300_305()
+    #excluir_ultima_linha_3()
 
 def alterar_reg_g():
     search_text = "."
@@ -73,9 +75,24 @@ def alterar_300_305():
     with open(r'sped_reg_300_305.txt', 'w') as file:
         file.write(data)
 
+def excluir_ultima_linha_g():
+    with open("sped_reg_g.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+
+    with open("sped_reg_g.txt", "w") as arquivo:
+        arquivo.writelines(linhas[:-1])
+
+def excluir_ultima_linha_3():
+    with open("sped_reg_300_305.txt", "r") as arquivo:
+        linhas = arquivo.readlines()
+
+    with open("sped_reg_300_305.txt", "w") as arquivo:
+        arquivo.writelines(linhas[:-1])
 
 
-deleta_dados_antigos()
+
+#excluir_ultima_linha_g()
+#deleta_dados_antigos()
 #sped_relatorio = Gerar_sped('reg_g.db')
 #sped_relatorio.importa_relatorio()
 #sped_relatorio.gerar_registro_g()
