@@ -6,9 +6,12 @@ conexao = sqlite3.connect('reg_g.db')
 cursor = conexao.cursor()
 
 def deleta_dados_antigos():
-    deleta_dados_tabela = 'delete from reg_g'
-    cursor.execute(deleta_dados_tabela)
-    conexao.commit()
+    try:
+        deleta_dados_tabela = 'delete from reg_g'
+        cursor.execute(deleta_dados_tabela)
+        conexao.commit()
+    except:
+        pass
 
 
 def importa_relatorio():
